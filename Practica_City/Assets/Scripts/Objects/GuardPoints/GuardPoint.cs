@@ -6,6 +6,7 @@ public class GuardPoint : MonoBehaviour
 {
     //Variables
     public int prioridad;
+    public int peso = 0;
     public List<GuardPoint> vecinos = new List<GuardPoint>();
     public float rangoVecinos;
     private SphereCollider v_Collider;
@@ -16,7 +17,7 @@ public class GuardPoint : MonoBehaviour
     {
         crearColliderRango();
         detectarVecinos();
-        
+        calcularPrioridad();
     }
 
     // Update is called once per frame
@@ -29,12 +30,27 @@ public class GuardPoint : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         Gizmos.DrawWireSphere(transform.position,rangoVecinos);
+        Gizmos.color = Color.red;
+        foreach(GuardPoint guard in vecinos)
+        {
+            Gizmos.DrawLine(this.gameObject.transform.position, guard.transform.position);
+        }
+        
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag == "Guard"){
-            
+        if(other.gameObject.tag == "Guard")
+        {
+            ocupado = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Guard")
+        {
+            ocupado = false;
         }
     }
 
@@ -43,6 +59,7 @@ public class GuardPoint : MonoBehaviour
         v_Collider = gameObject.AddComponent<SphereCollider>();
         v_Collider.center = Vector3.zero;
         v_Collider.radius = rangoVecinos;
+        v_Collider.isTrigger = true;
     }
 
     private void detectarVecinos()
@@ -50,28 +67,18 @@ public class GuardPoint : MonoBehaviour
         GameObject[] guardpoints = GameObject.FindGameObjectsWithTag("GuardPoint");
         foreach(GameObject guardPoint in guardpoints)
         {
-            
+            if (Vector3.Distance(guardPoint.transform.position,transform.position) <= rangoVecinos+guardPoint.GetComponent<GuardPoint>().rangoVecinos && guardPoint != this.gameObject)
+            {
+                //Añadir a una lista de tipo GuardPoint los gameobjects encontrados
+                GuardPoint aux = guardPoint.GetComponent<GuardPoint>();
+                vecinos.Add(aux);
+            }
         }
 
     }
 
-    private void calcularNuevaPrioridad()
+    private void calcularPrioridad()
     {
-        int nuevaPrioridad=0;
-        if (!ocupado)
-        {
-            nuevaPrioridad = vecinos.Count;
-        }
-
-        foreach(GuardPoint vecino in vecinos)
-        {
-            if (!vecino.ocupado)
-            {
-                nuevaPrioridad += vecino.prioridad;
-            }
-            
-        }
-
-        prioridad = nuevaPrioridad;
+        prioridad = peso + vecinos.Count;
     }
 }
