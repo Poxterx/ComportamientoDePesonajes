@@ -11,6 +11,7 @@ public class GuardIA : MonoBehaviour
     public float energia;
     public const float desgaste = 0.5f;
     private CapsuleCollider colisionador;
+    private Vector3 currentTarget;
 
     public bool operativo = true;
     public bool asignado = false;
@@ -69,7 +70,17 @@ public class GuardIA : MonoBehaviour
 
     public void irAPosicionAsignada(Vector3 nuevaPosicion)
     {
-        _agent.SetDestination(nuevaPosicion);
+        currentTarget = nuevaPosicion;
+        _agent.isStopped = false;
+        if (Vector3.Distance(currentTarget, transform.position) > 3.0f)
+        {
+            _agent.SetDestination(nuevaPosicion);
+        }
+        else
+        {
+            _agent.isStopped = true;
+        }
+        
     }
 
     private void consumo()

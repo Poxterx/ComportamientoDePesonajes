@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 7872657935965605149}
   - component: {fileID: 8808347812112997070}
   - component: {fileID: 8671278380349169804}
+  - component: {fileID: 2956739780241955617}
+  - component: {fileID: 1796151293903687242}
   m_Layer: 0
   m_Name: RestArea
   m_TagString: RestArea
@@ -77,3 +79,28 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+--- !u!135 &2956739780241955617
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699666294530523634}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 3
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &1796151293903687242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5699666294530523634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffcbf2588b803a841ae44fe8e0747e47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

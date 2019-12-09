@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Objects\CameraController.cs" />
     <Compile Include="Assets\Scripts\Objects\GuardPoints\GuardPoint.cs" />
     <Compile Include="Assets\Scripts\Objects\GuardPoints\GuardsManagerCore.cs" />
+    <Compile Include="Assets\Scripts\Objects\RestPoint.cs" />
     <None Include="Assets\Kenney Assets\Castle Kit\License.txt" />
     <Reference Include="Unity.ProGrids">
       <HintPath>G:/GitHubDesktop_Repositories/ComportamientoDePesonajes/Practica_City/Library/ScriptAssemblies/Unity.ProGrids.dll</HintPath>
