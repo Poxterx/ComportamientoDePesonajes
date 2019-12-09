@@ -12,10 +12,8 @@ public class GuardPoint : MonoBehaviour
     private SphereCollider v_Collider;
     public GuardIA guardiaAsignado = null;
     public bool ocupado = false;
-
-
-
-    //private GuardsManagerCore refManager = GuardsManagerCore.Instance;
+    public bool llegadaConfirmada = false;
+    public float tiempoEspera;
 
     // Start is called before the first frame update
     void Start()
@@ -28,7 +26,15 @@ public class GuardPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Comprobamos si el tiempo de espera se ha agotado porque el guardia no ha llegado, para que se libere
+        if (tiempoEspera<=0 && guardiaAsignado != null && !llegadaConfirmada)
+        {
+            ocupado = false;
+            guardiaAsignado.asignado = false;
+            guardiaAsignado = null;
+        }
 
+        tiempoEspera -= 1.0f*Time.deltaTime;
     }
 
     private void OnDrawGizmos()
@@ -45,9 +51,9 @@ public class GuardPoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject == guardiaAsignado)
+        if (other.gameObject.GetComponent<GuardIA>() == guardiaAsignado)
         {
-            ocupado = true;
+            llegadaConfirmada = true;
         }
     }
 
@@ -55,6 +61,7 @@ public class GuardPoint : MonoBehaviour
     {
         if (other.gameObject.GetComponent<GuardIA>() == guardiaAsignado)
         {
+            llegadaConfirmada = false;
             ocupado = false;
             guardiaAsignado = null;
             other.gameObject.GetComponent<GuardIA>().asignado = false;

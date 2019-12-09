@@ -23,6 +23,8 @@ public class GuardIA : MonoBehaviour
         hambre = Random.Range(70.0f, 100.0f);
         energia = Random.Range(70.0f, 100.0f);  
         colisionador = GetComponent<CapsuleCollider>();
+
+        ignorarColisionGuardias();
     }
 
     // Update is called once per frame
@@ -63,6 +65,7 @@ public class GuardIA : MonoBehaviour
             //Cubro mis necesidades
             else if (!operativo)
             {
+                asignado = false;
                 irAPosicionAsignada( encontrarLugarDeDescansoMasCercano() ) ;
             }        
         

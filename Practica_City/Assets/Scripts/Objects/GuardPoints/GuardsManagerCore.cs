@@ -35,11 +35,6 @@ public class GuardsManagerCore : MonoBehaviour
 
     }
 
-    private void Update()
-    {
-        
-    }
-
     private void montarListaGuardPoints()
     {
         GameObject[] guardpoints = GameObject.FindGameObjectsWithTag("GuardPoint");
@@ -62,6 +57,7 @@ public class GuardsManagerCore : MonoBehaviour
         {
             if (listaGuardpoints[i].ocupado == false)
             {
+                listaGuardpoints[i].tiempoEspera = 100.0f;
                 listaGuardpoints[i].ocupado = true;
                 listaGuardpoints[i].guardiaAsignado = guardia.gameObject.GetComponent<GuardIA>();
                 //Encontrado trabajo y asignado

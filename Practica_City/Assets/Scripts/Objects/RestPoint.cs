@@ -23,9 +23,15 @@ public class RestPoint : MonoBehaviour
 
     private void OnTriggerStay(Collider other)
     {
-        // hambre -= desgaste * Time.deltaTime;
         GuardIA guardia = other.gameObject.GetComponent<GuardIA>();
-        guardia.hambre += recoverRate * Time.deltaTime;
-        guardia.energia += (recoverRate * 0.8f) * Time.deltaTime;
+        if (guardia.hambre<100.0f)
+        {
+            guardia.hambre += recoverRate * Time.deltaTime;
+        }
+        if (guardia.energia<100.0f)
+        {
+            guardia.energia += (recoverRate * 0.8f) * Time.deltaTime;
+        }
+        
     }
 }
