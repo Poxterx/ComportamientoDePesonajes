@@ -53,7 +53,7 @@ public class GuardPoint : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject == guardiaAsignado)
+        if (other.gameObject.GetComponent<GuardIA>() == guardiaAsignado)
         {
             ocupado = false;
             guardiaAsignado = null;

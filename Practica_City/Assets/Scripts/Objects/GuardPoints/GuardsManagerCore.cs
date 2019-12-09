@@ -39,7 +39,7 @@ public class GuardsManagerCore : MonoBehaviour
 
     private void Update()
     {
-        asignarGuardias();
+        
     }
 
     private void montarListaGuardPoints()
@@ -97,6 +97,30 @@ public class GuardsManagerCore : MonoBehaviour
                 }
             }
         }
+    }
+
+    //#############################################
+    public Vector3 mirarTrabajoDisponible(GuardIA guardia)
+    {
+        int i = 0;
+        while ( listaGuardpoints.Count > i)
+        {
+            if (listaGuardpoints[i].ocupado == false)
+            {
+                listaGuardpoints[i].ocupado = true;
+                listaGuardpoints[i].guardiaAsignado = guardia.gameObject.GetComponent<GuardIA>();
+                //Encontrado trabajo y asignado
+                return listaGuardpoints[i].transform.position;
+            }
+            i++; 
+        }
+        //No hay trabajo
+        return Vector3.zero;
+    }
+
+    public Vector3 solicitarPuntoDeEspera()
+    {
+        return reserva.transform.position;
     }
 
 }
