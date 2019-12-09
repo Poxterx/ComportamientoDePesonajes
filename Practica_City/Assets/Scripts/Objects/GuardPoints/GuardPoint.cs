@@ -10,7 +10,12 @@ public class GuardPoint : MonoBehaviour
     public List<GuardPoint> vecinos = new List<GuardPoint>();
     public float rangoVecinos;
     private SphereCollider v_Collider;
+    public GuardIA guardiaAsignado = null;
     public bool ocupado = false;
+
+
+
+    //private GuardsManagerCore refManager = GuardsManagerCore.Instance;
 
     // Start is called before the first frame update
     void Start()
@@ -23,24 +28,24 @@ public class GuardPoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position,rangoVecinos);
+        Gizmos.DrawWireSphere(transform.position, rangoVecinos);
         Gizmos.color = Color.red;
-        foreach(GuardPoint guard in vecinos)
+        foreach (GuardPoint guard in vecinos)
         {
             Gizmos.DrawLine(this.gameObject.transform.position, guard.transform.position);
         }
-        
+
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.gameObject.tag == "Guard")
+        if (other.gameObject == guardiaAsignado)
         {
             ocupado = true;
         }
@@ -48,9 +53,11 @@ public class GuardPoint : MonoBehaviour
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.gameObject.tag == "Guard")
+        if (other.gameObject == guardiaAsignado)
         {
             ocupado = false;
+            guardiaAsignado = null;
+            other.gameObject.GetComponent<GuardIA>().asignado = false;
         }
     }
 
@@ -65,9 +72,9 @@ public class GuardPoint : MonoBehaviour
     private void detectarVecinos()
     {
         GameObject[] guardpoints = GameObject.FindGameObjectsWithTag("GuardPoint");
-        foreach(GameObject guardPoint in guardpoints)
+        foreach (GameObject guardPoint in guardpoints)
         {
-            if (Vector3.Distance(guardPoint.transform.position,transform.position) <= rangoVecinos+guardPoint.GetComponent<GuardPoint>().rangoVecinos && guardPoint != this.gameObject)
+            if (Vector3.Distance(guardPoint.transform.position, transform.position) <= rangoVecinos + guardPoint.GetComponent<GuardPoint>().rangoVecinos && guardPoint != this.gameObject)
             {
                 //Añadir a una lista de tipo GuardPoint los gameobjects encontrados
                 GuardPoint aux = guardPoint.GetComponent<GuardPoint>();

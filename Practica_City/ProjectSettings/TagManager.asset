@@ -6,6 +6,8 @@ TagManager:
   tags:
   - GuardPoint
   - Guard
+  - Reserve
+  - RestArea
   layers:
   - Default
   - TransparentFX

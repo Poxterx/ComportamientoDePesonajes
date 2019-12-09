@@ -16,6 +16,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &8918838317015203885
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3192873506988536581}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 2
+  m_Height: 6
+  m_Direction: 1
+  m_Center: {x: 0, y: 2.5, z: 0}
 --- !u!195 &904314803
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -38,7 +52,7 @@ NavMeshAgent:
   m_BaseOffset: 2.6
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &904314804
+--- !u!114 &5690678388330855779
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -47,23 +61,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 3192873506988536581}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f3e10f8c77a4ab438946a917c069bca, type: 3}
+  m_Script: {fileID: 11500000, guid: f1beb21dc343f854fae285e519d8f4ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &8918838317015203885
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3192873506988536581}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  m_Radius: 2
-  m_Height: 6
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.5, z: 0}
+  hambre: 0
+  energia: 0
 --- !u!1001 &3192873506826755980
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -142,7 +144,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100002, guid: c209635d641d0f44fb23429fea184b87, type: 3}
       propertyPath: m_Name
-      value: knightBlue Variant
+      value: Guardia
       objectReference: {fileID: 0}
     - target: {fileID: 100002, guid: c209635d641d0f44fb23429fea184b87, type: 3}
       propertyPath: m_TagString
