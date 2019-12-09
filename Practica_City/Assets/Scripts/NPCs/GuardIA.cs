@@ -3,16 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
+//Clase que contiene toda la lógica de los guardias.
 public class GuardIA : MonoBehaviour
 {
     NavMeshAgent _agent;
 
+    //Necesidades del guardia
     public float hambre;
     public float energia;
+    //Velocidad de consumo de las necesidades
     public const float desgaste = 0.5f;
     private CapsuleCollider colisionador;
+    //Posición del objetivo actual
     private Vector3 currentTarget;
-
+    //Comprobantes del estado del guardia
     public bool operativo = true;
     public bool asignado = false;
 
@@ -46,7 +50,6 @@ public class GuardIA : MonoBehaviour
         //Si no hay trabajo disponible me voy a la reserva
 
         //Miro mi estado y decido si estoy dispuesto para trabajar
-        
             if (operativo && !asignado)
             {
                Vector3 nuevoTrabajo = GuardsManagerCore.Instance.mirarTrabajoDisponible(this);
@@ -71,6 +74,7 @@ public class GuardIA : MonoBehaviour
         
     }
 
+    //Metodo usado para mover el agente a una nueva posición según la NavMesh
     public void irAPosicionAsignada(Vector3 nuevaPosicion)
     {
         currentTarget = nuevaPosicion;
@@ -86,6 +90,7 @@ public class GuardIA : MonoBehaviour
         
     }
 
+    //Metodo para reducir las necesidades del guardia
     private void consumo()
     {            
         if (hambre < 0)
@@ -104,6 +109,7 @@ public class GuardIA : MonoBehaviour
             energia -= desgaste * Time.deltaTime;
         }
     }
+    //Cambia los valores de estado del guardia
     private void comprobarEstado()
     {
         if (hambre>=70.0f && energia>=70.0f)
@@ -115,7 +121,7 @@ public class GuardIA : MonoBehaviour
             operativo = false;
         }
     }
-
+    //Metodo que hace que se ignoren mejor las colisiones con otros guardias
     private void ignorarColisionGuardias()
     {
         GameObject[] guards = GameObject.FindGameObjectsWithTag("Guard");
@@ -125,7 +131,7 @@ public class GuardIA : MonoBehaviour
         }
 
     }
-
+    //Metodo que cambia el objetivo a un area de descanso para suplir sus necesidades. Comprueba la más cercana en cada momento
     private Vector3 encontrarLugarDeDescansoMasCercano()
     {
         GameObject[] restAreas = GameObject.FindGameObjectsWithTag("RestArea");

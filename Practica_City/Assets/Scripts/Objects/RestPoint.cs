@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RestPoint : MonoBehaviour
 {
-
+    //Velocidad de recuperación
     public float recoverRate = 3.0f;
         
     
@@ -21,6 +21,8 @@ public class RestPoint : MonoBehaviour
         
     }
 
+
+     //El metodo incrementa la vida y energia de los guardias dentro de su area de efecto cada segundo.
     private void OnTriggerStay(Collider other)
     {
         GuardIA guardia = other.gameObject.GetComponent<GuardIA>();

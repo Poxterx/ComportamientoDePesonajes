@@ -4,15 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+
+//Esta clase gestiona los GuardPoints para que se les pueda asignar guardias
 public class GuardsManagerCore : MonoBehaviour
 {
     //Singleton GuardManagerCore
     public static GuardsManagerCore Instance { get; private set; }
     public List<GuardPoint> listaGuardpoints;
-    public List<GuardIA> guardias;
     public GameObject reserva;
 
-
+    //Parte del Singleton
     private void Awake()
     {
         if(Instance == null)
@@ -35,6 +36,7 @@ public class GuardsManagerCore : MonoBehaviour
 
     }
 
+    //Encuentra todos los objetos con Tag GuardPoint y los añade a la lista para despues poder asignar a los guardias
     private void montarListaGuardPoints()
     {
         GameObject[] guardpoints = GameObject.FindGameObjectsWithTag("GuardPoint");
@@ -49,7 +51,7 @@ public class GuardsManagerCore : MonoBehaviour
     }
    
 
-    //#############################################
+    //Comprueba si encuentra un GuardPoint vacante, si no lo encuentra porque están todos cubiertos devuelve cero
     public Vector3 mirarTrabajoDisponible(GuardIA guardia)
     {
         int i = 0;
@@ -69,6 +71,7 @@ public class GuardsManagerCore : MonoBehaviour
         return Vector3.zero;
     }
 
+    //Devuelve la posición del punto de espera para los guardias
     public Vector3 solicitarPuntoDeEspera()
     {
         return reserva.transform.position;
